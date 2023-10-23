@@ -19,3 +19,8 @@ export const feeTypeUrls = {
 	getAll: `${apiUrl}feeType`,
 	getOne: (id: string | number) => `${apiUrl}feeType/${id}`,
 };
+
+export const staffUrls = {
+	getAll: `${apiUrl}staffs`,
+	getOne: (id: string | number) => `${apiUrl}staffs/${id}`,
+};
