@@ -4,6 +4,7 @@ import studentReducer from './student/student.slice';
 import sessionReducer from './sessions/session.slice';
 import feeTypeReducer from './feeType/feeType.slice';
 import staffReducer from './staff/staff.slice';
+import classReducer from './classes/class.slice';
 
 const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
 		session: sessionReducer,
 		feeType: feeTypeReducer,
 		staff: staffReducer,
+		class: classReducer,
 	},
 });
 

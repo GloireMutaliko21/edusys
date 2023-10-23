@@ -24,3 +24,8 @@ export const staffUrls = {
 	getAll: `${apiUrl}staffs`,
 	getOne: (id: string | number) => `${apiUrl}staffs/${id}`,
 };
+
+export const classesUrls = {
+	getAll: `${apiUrl}classes`,
+	getOne: (id: string | number) => `${apiUrl}classes/${id}`,
+};

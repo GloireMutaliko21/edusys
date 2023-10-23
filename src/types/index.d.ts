@@ -130,6 +130,10 @@ interface Staff extends GeneralInfos {
 	disable_at?: Date | string;
 }
 
+interface Classe extends GeneralInfos {
+	class: string;
+}
+
 interface User extends GeneralInfos {
 	username: string;
 	email: string;
