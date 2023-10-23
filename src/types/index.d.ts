@@ -68,6 +68,10 @@ interface Student extends GeneralInfos {
 	parent_app_key?: any;
 }
 
+interface Session extends GeneralInfos {
+	session: string;
+}
+
 interface User extends GeneralInfos {
 	username: string;
 	email: string;

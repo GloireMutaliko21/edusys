@@ -9,3 +9,8 @@ export const studentUrls = {
 	getAll: `${apiUrl}students`,
 	getOne: (id: string | number) => `${apiUrl}students/${id}`,
 };
+
+export const sessionUrls = {
+	getAll: `${apiUrl}sessions`,
+	getOne: (id: string | number) => `${apiUrl}sessions/${id}`,
+};

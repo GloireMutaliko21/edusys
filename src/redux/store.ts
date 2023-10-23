@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/auth.slice';
 import studentReducer from './student/student.slice';
+import sessionReducer from './sessions/session.slice';
 
 const store = configureStore({
 	reducer: {
 		auth: authReducer,
 		student: studentReducer,
+		session: sessionReducer,
 	},
 });
 
