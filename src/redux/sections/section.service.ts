@@ -2,19 +2,19 @@ import { AsyncThunkPayloadCreator } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
 import { returnApiError } from '@/utils/api-error.handler';
 import { RootState } from '../store';
-import { studentUrls } from '../helpers';
+import { sectionUrls } from '../helpers';
 
-interface Students {
+interface Sections {
 	msg: string;
-	data: StudentGlobal[];
+	data: Section[];
 }
 
-interface SingleStudent {
+interface SingleSection {
 	msg: string;
-	data: StudentGlobal;
+	data: Section;
 }
 
-export const getStudents: AsyncThunkPayloadCreator<Students> = async (
+export const getSections: AsyncThunkPayloadCreator<Sections> = async (
 	_,
 	thunkAPI
 ) => {
@@ -22,8 +22,8 @@ export const getStudents: AsyncThunkPayloadCreator<Students> = async (
 		auth: { token },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<Students> = await axios.get(
-			studentUrls.getAllData,
+		const response: AxiosResponse<Sections> = await axios.get(
+			sectionUrls.getAll,
 			{ headers: { Authorization: `Bearer ${token}` } }
 		);
 		return response.data;
@@ -34,16 +34,16 @@ export const getStudents: AsyncThunkPayloadCreator<Students> = async (
 	}
 };
 
-export const getStudent: AsyncThunkPayloadCreator<
-	SingleStudent,
+export const getSection: AsyncThunkPayloadCreator<
+	SingleSection,
 	string | number
 > = async (id, thunkAPI) => {
 	const {
 		auth: { token },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<SingleStudent> = await axios.get(
-			studentUrls.getOne(id),
+		const response: AxiosResponse<SingleSection> = await axios.get(
+			sectionUrls.getOne(id),
 			{ headers: { Authorization: `Bearer ${token}` } }
 		);
 		return response.data;

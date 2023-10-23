@@ -3,8 +3,8 @@ import * as studentService from './student.service';
 import { STATUS } from '@/constants/constants';
 
 const initialState: {
-	students: Student[];
-	selectedSudent: Student | null;
+	students: StudentGlobal[];
+	selectedSudent: StudentGlobal | null;
 	status: {
 		isLoading: boolean;
 		isSuccess: boolean;

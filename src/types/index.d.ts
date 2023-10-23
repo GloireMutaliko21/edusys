@@ -68,6 +68,28 @@ interface Student extends GeneralInfos {
 	parent_app_key?: any;
 }
 
+interface StudentGlobal extends GeneralInfos {
+	route_id: any;
+	hostel_room_id: string | number;
+	vehroute_id: string | number;
+	transport_fees: number;
+	fees_discount: number;
+	is_alumni: boolean | string | number;
+	default_login: string | number;
+	session_id: string | number;
+	student_id: string | number;
+	class_id: string | number;
+	section_id: string | number;
+	student: Student;
+	class: Classe;
+	section: Section;
+	session: Session;
+}
+
+interface Section extends GeneralInfos {
+	section: string;
+}
+
 interface Session extends GeneralInfos {
 	session: string;
 }
