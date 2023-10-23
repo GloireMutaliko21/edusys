@@ -7,12 +7,18 @@ export const authUrls = {
 
 export const studentUrls = {
 	getAll: `${apiUrl}students`,
+	getAllData: `${apiUrl}students/data`,
 	getOne: (id: string | number) => `${apiUrl}students/${id}`,
 };
 
 export const sessionUrls = {
 	getAll: `${apiUrl}sessions`,
 	getOne: (id: string | number) => `${apiUrl}sessions/${id}`,
+};
+
+export const sectionUrls = {
+	getAll: `${apiUrl}sections`,
+	getOne: (id: string | number) => `${apiUrl}sections/${id}`,
 };
 
 export const feeTypeUrls = {
