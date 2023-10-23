@@ -72,6 +72,14 @@ interface Session extends GeneralInfos {
 	session: string;
 }
 
+interface FeeType extends GeneralInfos {
+	is_system: number;
+	feecategory_id?: string | number;
+	type: string;
+	code: string;
+	description: string;
+}
+
 interface User extends GeneralInfos {
 	username: string;
 	email: string;

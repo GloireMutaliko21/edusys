@@ -14,3 +14,8 @@ export const sessionUrls = {
 	getAll: `${apiUrl}sessions`,
 	getOne: (id: string | number) => `${apiUrl}sessions/${id}`,
 };
+
+export const feeTypeUrls = {
+	getAll: `${apiUrl}feeType`,
+	getOne: (id: string | number) => `${apiUrl}feeType/${id}`,
+};
