@@ -7,6 +7,7 @@ import { authUrls } from '../helpers';
 interface UserConnected {
 	msg: string;
 	data: User;
+	token: string;
 }
 
 export const login: AsyncThunkPayloadCreator<

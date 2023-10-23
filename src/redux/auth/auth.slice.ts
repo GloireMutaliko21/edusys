@@ -5,6 +5,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	user: any;
+	token?: string;
 	status: {
 		isLoading: boolean;
 		isSuccess: boolean;
@@ -35,11 +36,9 @@ const authSlice = createSlice({
 			state.user = null;
 			window.location.replace('/login');
 		},
-		loadUserData: (
-			state,
-			{ payload }: { payload: typeof initialState.user }
-		) => {
-			state.user = payload;
+		loadUserData: (state, { payload }: { payload: any }) => {
+			state.user = payload.data;
+			state.token = payload.token;
 		},
 		setAuthIsError: (state, actions) => {
 			state.status.isError = actions.payload;
@@ -55,8 +54,12 @@ const authSlice = createSlice({
 				state.status = STATUS.PENDING;
 			})
 			.addCase(loginUser.fulfilled, (state, { payload }) => {
-				localStorage.setItem('user-session', JSON.stringify(payload.data));
+				localStorage.setItem(
+					'user-session',
+					JSON.stringify({ user: payload.data, token: payload.token })
+				);
 				state.user = payload.data;
+				state.token = payload.token;
 				state.message = payload.msg;
 			})
 			.addCase(loginUser.rejected, (state, { payload }) => {
