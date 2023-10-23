@@ -15,11 +15,11 @@ const initialState: {
 } = {
 	user:
 		typeof window !== 'undefined'
-			? JSON.parse(window?.localStorage?.getItem('user-session')!).user
+			? JSON.parse(window?.localStorage?.getItem('user-session')!)?.user
 			: null,
 	token:
 		typeof window !== 'undefined'
-			? JSON.parse(window?.localStorage?.getItem('user-session')!).token
+			? JSON.parse(window?.localStorage?.getItem('user-session')!)?.token
 			: null,
 	status: {
 		isLoading: false,
