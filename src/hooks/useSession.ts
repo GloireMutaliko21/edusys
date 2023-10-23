@@ -4,7 +4,7 @@ import { useAppSelector } from './useAppSelector';
 import useAuth from './useAuth';
 import { getSessions, setSessionIsError } from '@/redux/sessions/session.slice';
 
-const useStudents = () => {
+const useSession = () => {
 	const { sessions, selectedSession, message, status } = useAppSelector(
 		(state) => state.session
 	);
@@ -24,4 +24,4 @@ const useStudents = () => {
 	};
 };
 
-export default useStudents;
+export default useSession;
