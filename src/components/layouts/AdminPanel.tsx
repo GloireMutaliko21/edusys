@@ -6,7 +6,7 @@ import useAuth from '@/hooks/useAuth';
 
 const AdminPanel = ({ children }: { children: React.ReactNode }) => {
 	const { isLogin } = useAuth();
-	const localSession = JSON.parse(localStorage.getItem('session-user')!);
+	const localSession = JSON.parse(localStorage.getItem('user-session')!);
 	return (
 		<main className='h-screen'>
 			<Sidebar />

@@ -6,22 +6,22 @@ import { useAppSelector } from './useAppSelector';
 
 const useAuth = () => {
 	const dispatch = useAppDispatch();
-	const user = useAppSelector((state) => state.auth);
+	const auth = useAppSelector((state) => state.auth);
 
 	const isLogin = useMemo(() => {
-		return !!user.user;
-	}, [user.user]);
+		return !!auth.user;
+	}, [auth.user]);
 
 	const logout = () => {
 		dispatch(logoutUser());
 	};
 
 	useEffect(() => {
-		const session = JSON.parse(localStorage.getItem('session-user')!);
-		if (!user.user && session) dispatch(loadUserData(session));
-	}, [dispatch, user.user]);
+		const session = JSON.parse(localStorage.getItem('user-session')!);
+		if (!auth.user && session) dispatch(loadUserData(session));
+	}, [dispatch, auth.user]);
 
-	return { user, isLogin, logout };
+	return { auth, isLogin, logout };
 };
 
 export default useAuth;
