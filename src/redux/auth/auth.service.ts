@@ -5,13 +5,13 @@ import { RootState } from '../store';
 import { authUrls } from '../helpers';
 
 interface UserConnected {
-	message: string;
+	msg: string;
 	data: User;
 }
 
 export const login: AsyncThunkPayloadCreator<
 	UserConnected,
-	{ username: string; password: string }
+	{ email: string; password: string }
 > = async (data, thunkAPI) => {
 	try {
 		const response: AxiosResponse<UserConnected> = await axios.post(

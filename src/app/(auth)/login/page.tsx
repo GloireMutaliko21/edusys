@@ -11,16 +11,16 @@ const Login = () => {
 	const dispatch = useAppDispatch();
 
 	const [data, setData] = useState({
-		username: '',
+		email: '',
 		password: '',
 	});
 
 	const submit: FormEventHandler = (e) => {
 		e.preventDefault();
-		const { username, password } = data;
+		const { email, password } = data;
 
 		const payload = {
-			username,
+			email,
 			password,
 		};
 
@@ -54,11 +54,11 @@ const Login = () => {
 						{/* Form Group */}
 						<Input
 							label="E-mail ou nom d'utilisateur"
-							name='username'
+							name='email'
 							placeholder='Entrer votre email'
 							full={false}
 							type='text'
-							value={data.username}
+							value={data.email}
 							error=''
 							onChange={handleChange}
 							required

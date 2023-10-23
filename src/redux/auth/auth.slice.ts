@@ -57,7 +57,7 @@ const authSlice = createSlice({
 			.addCase(loginUser.fulfilled, (state, { payload }) => {
 				localStorage.setItem('user-session', JSON.stringify(payload.data));
 				state.user = payload.data;
-				state.message = payload.message;
+				state.message = payload.msg;
 			})
 			.addCase(loginUser.rejected, (state, { payload }) => {
 				localStorage.removeItem('user-session');
