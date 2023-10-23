@@ -1,7 +1,8 @@
 import Link from 'next/link';
+import useAuth from '@/hooks/useAuth';
 
 const Sidebar = () => {
-	// const { logout } = useAuth();
+	const { logout } = useAuth();
 	return (
 		<>
 			{/* Sidebar */}
@@ -24,7 +25,7 @@ const Sidebar = () => {
 				>
 					<ul className='space-y-1.5 mb-20'>
 						<button
-							// onClick={logout}
+							onClick={logout}
 							className={`flex items-center gap-x-3.5 py-2 px-2.5 bg-gray-100 text-sm text-red-500 rounded-md hover:bg-gray-100 dark:bg-gray-900 dark:text-white w-full`}
 						>
 							<svg

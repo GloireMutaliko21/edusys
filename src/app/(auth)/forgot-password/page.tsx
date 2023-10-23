@@ -16,7 +16,7 @@ function ForgotPassword() {
 				</h1>
 				<p className='mt-2 text-sm text-gray-600 dark:text-gray-400'>
 					<Link
-						className='text-blue-600 decoration-2 hover:underline font-medium'
+						className='text-primary-600 decoration-2 hover:underline font-medium'
 						href='/login'
 					>
 						Se connecter ici
@@ -45,7 +45,7 @@ function ForgotPassword() {
 						{/* End Form Group */}
 						<button
 							type='submit'
-							className='py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800'
+							className='py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary-700 text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800'
 						>
 							Réinitialiser le mot de passe
 						</button>

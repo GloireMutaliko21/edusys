@@ -15,6 +15,20 @@ const config: Config = {
 				'gradient-conic':
 					'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
 			},
+			colors: {
+				primary: {
+					900: '#006064',
+					800: '#00838F',
+					700: '#0097A7',
+					600: '#00ACC1',
+					500: '#00BCD4',
+					400: '#26C6DA',
+					300: '#4DD0E1',
+					200: '#80DEEA',
+					100: '#B2EBF2',
+					50: '#E0F7FA',
+				},
+			},
 		},
 	},
 	plugins: [require('preline/plugin')],
