@@ -5,7 +5,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	user: any;
-	token?: string;
+	token: string | null;
 	status: {
 		isLoading: boolean;
 		isSuccess: boolean;
@@ -15,7 +15,11 @@ const initialState: {
 } = {
 	user:
 		typeof window !== 'undefined'
-			? JSON.parse(window?.localStorage?.getItem('user-session')!)
+			? JSON.parse(window?.localStorage?.getItem('user-session')!).user
+			: null,
+	token:
+		typeof window !== 'undefined'
+			? JSON.parse(window?.localStorage?.getItem('user-session')!).token
 			: null,
 	status: {
 		isLoading: false,
@@ -37,8 +41,8 @@ const authSlice = createSlice({
 			window.location.replace('/login');
 		},
 		loadUserData: (state, { payload }: { payload: any }) => {
-			state.user = payload.data;
-			state.token = payload.token;
+			state.user = payload.data.user;
+			state.token = payload.data.token;
 		},
 		setAuthIsError: (state, actions) => {
 			state.status.isError = actions.payload;

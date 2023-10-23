@@ -31,10 +31,10 @@ const Login = () => {
 	};
 
 	// Account Verification
-	const { user } = useAuth();
+	const { auth } = useAuth();
 	const router = useRouter();
 	useEffect(() => {
-		if (user.user || localStorage.getItem('session-user')) router.push('/');
+		if (auth.user || localStorage.getItem('user-session')) router.push('/');
 	});
 
 	return (
@@ -103,9 +103,9 @@ const Login = () => {
 							type='submit'
 							className='py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-primary-500 text-white hover:bg-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800'
 						>
-							{user.status.isLoading ? (
+							{auth.status.isLoading ? (
 								<span
-									hidden={user.status.isLoading}
+									hidden={auth.status.isLoading}
 									className='w-6 h-6 inline-block animate-spin border border-transparent border-t-neutral-200 rounded-full'
 								/>
 							) : (
