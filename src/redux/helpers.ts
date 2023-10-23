@@ -4,3 +4,8 @@ export const authUrls = {
 	login: `${apiUrl}staffs/login`,
 	editPassword: `${apiUrl}auth/password`,
 };
+
+export const studentUrls = {
+	getAll: `${apiUrl}students`,
+	getOne: (id: string | number) => `${apiUrl}students/${id}`,
+};
