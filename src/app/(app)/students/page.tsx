@@ -1,5 +1,6 @@
 'use client';
 import PageHeader from '@/components/global/PageHeader';
+import { generateStudentCard } from '@/docs/studentCard';
 import { filterStudents } from '@/features/filter';
 import useClasses from '@/hooks/useClasse';
 import useSection from '@/hooks/useSection';
@@ -15,6 +16,10 @@ const Page = () => {
 	const { classes } = useClasses();
 	const { sections } = useSection();
 	const { students } = useStudents();
+
+	const generateCard = async (student: StudentGlobal) => {
+		await generateStudentCard(student);
+	};
 
 	return (
 		<main className='flex flex-col h-full'>
@@ -127,10 +132,10 @@ const Page = () => {
 							key: 'action',
 							dataIndex: 'action',
 							title: '',
-							render: (_, { id }, __) => (
+							render: (_, record, __) => (
 								<button
 									className='border border-primary-500 text-primary-500 flex justify-center hover:text-primary-700 py-px px-4'
-									// onClick={() => onUpdate(id)}
+									onClick={() => generateCard(record)}
 								>
 									Imprimer la carte
 								</button>

@@ -8,7 +8,7 @@ export const authUrls = {
 export const studentUrls = {
 	getAll: `${apiUrl}students`,
 	getAllData: `${apiUrl}students/data`,
-	getOne: (id: string | number) => `${apiUrl}students/${id}`,
+	getOne: (id: string | number) => `${apiUrl}students/one?id=${id}`,
 };
 
 export const sessionUrls = {
