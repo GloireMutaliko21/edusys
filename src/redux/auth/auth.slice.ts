@@ -41,8 +41,8 @@ const authSlice = createSlice({
 			window.location.replace('/login');
 		},
 		loadUserData: (state, { payload }: { payload: any }) => {
-			state.user = payload.data.user;
-			state.token = payload.data.token;
+			state.user = payload.data?.user;
+			state.token = payload.data?.token;
 		},
 		setAuthIsError: (state, actions) => {
 			state.status.isError = actions.payload;

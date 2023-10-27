@@ -127,7 +127,7 @@ export async function generateStudentCard(student: StudentGlobal) {
 		JSON.stringify({
 			id: student.student.admission_no,
 			names: student.student.firstname + ' ' + student.student.lastname,
-			matricle: student.student.admission_date,
+			matricule: student.student.admission_date,
 			promotion: student.class.class,
 			section: student.section.section,
 			anneeAcad: student.session.session,
