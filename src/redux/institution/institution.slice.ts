@@ -25,6 +25,11 @@ const getInstitution = createAsyncThunk(
 	institutionService.getInstitution
 );
 
+const updateInstitution = createAsyncThunk(
+	'institutions/update',
+	institutionService.updateInstitution
+);
+
 const institutionSlice = createSlice({
 	name: 'institution',
 	initialState,
@@ -39,7 +44,7 @@ const institutionSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 
-			// get staff
+			// get institution
 			.addCase(getInstitution.pending, (state) => {
 				state.status = STATUS.PENDING;
 			})
@@ -51,6 +56,20 @@ const institutionSlice = createSlice({
 			.addCase(getInstitution.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
 				state.message = payload as string;
+			})
+
+			// update institution
+			.addCase(updateInstitution.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(updateInstitution.fulfilled, (state, { payload }) => {
+				state.status = STATUS.SUCCESS;
+				state.institution = payload.data;
+				state.message = null;
+			})
+			.addCase(updateInstitution.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.message = payload as string;
 			});
 	},
 });
@@ -59,7 +78,7 @@ const institutionSlice = createSlice({
 export default institutionSlice.reducer;
 
 //slices
-export { getInstitution };
+export { getInstitution, updateInstitution };
 
 //actions
 export const { setInstitutionIsError, setInstitutionIsSuccess } =
