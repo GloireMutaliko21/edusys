@@ -68,7 +68,7 @@ export const updateInstitution: AsyncThunkPayloadCreator<
 	} = thunkAPI.getState() as RootState;
 	try {
 		const body = serialize(payload);
-		const response: AxiosResponse<GetInstitution> = await axios.put(
+		const response: AxiosResponse<GetInstitution> = await axios.patch(
 			institutionUrls.update,
 			body,
 			{

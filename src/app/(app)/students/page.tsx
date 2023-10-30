@@ -1,5 +1,6 @@
 'use client';
 import PageHeader from '@/components/global/PageHeader';
+import SpinLoader from '@/components/global/SpinLoader';
 import { generateStudentCard } from '@/docs/studentCard';
 import { filterStudents } from '@/features/filter';
 import useClasses from '@/hooks/useClasse';
@@ -14,9 +15,9 @@ const Page = () => {
 	const [filteredPromotion, setFilteredPromotion] = useState<string[]>([]);
 	const [filteredSection, setFilteredSection] = useState<string[]>([]);
 
-	const { classes } = useClasses();
-	const { sections } = useSection();
-	const { students } = useStudents();
+	const { classes, status: classStatus } = useClasses();
+	const { sections, status: sectionStatus } = useSection();
+	const { students, status: studentStatus } = useStudents();
 	const { institution } = useInstitution();
 
 	const generateCard = async (student: StudentGlobal) => {
@@ -36,6 +37,7 @@ const Page = () => {
 							placeholder='Promotion'
 							optionLabelProp='label'
 							placement='topRight'
+							loading={classStatus.isLoading}
 							options={classes.map((classe) => ({
 								label: classe.class,
 								value: classe.class,
@@ -51,6 +53,7 @@ const Page = () => {
 							placeholder='Section'
 							optionLabelProp='label'
 							placement='topRight'
+							loading={sectionStatus.isLoading}
 							options={sections.map((section) => ({
 								label: section.section,
 								value: section.section,
@@ -66,85 +69,89 @@ const Page = () => {
 						/>
 					</div>
 				</div>
-				<Table
-					size='small'
-					pagination={{ hideOnSinglePage: true, pageSize: 12 }}
-					dataSource={students}
-					columns={[
-						{
-							key: 'id',
-							dataIndex: 'id',
-							title: 'N°',
-							render: (_, __, index) => index + 1,
-							width: '3rem',
-						},
-						{
-							key: 'matricule',
-							dataIndex: 'matricule',
-							title: 'Matricule',
-							render: (_, { student }, __) => student.admission_no,
-							width: '150px',
-						},
-						{
-							key: 'names',
-							dataIndex: 'names',
-							title: 'Etudiant',
-							render: (_, { student }, __) => (
-								<p>
-									{student.firstname}{' '}
-									{student.middlename != 'NULL' ? student.middlename : ' '}{' '}
-									{student.lastname}
-								</p>
-							),
-							filteredValue: [
-								...filteredPromotion,
-								...filteredSection,
-								searchedText,
-							],
-							onFilter: (value, { student, class: classe, section }) => {
-								return filterStudents(
-									filteredPromotion,
-									filteredSection,
-									value,
-									classe,
-									section,
-									student
-								);
+				{studentStatus.isLoading ? (
+					<SpinLoader />
+				) : (
+					<Table
+						size='small'
+						pagination={{ hideOnSinglePage: true, pageSize: 12 }}
+						dataSource={students}
+						columns={[
+							{
+								key: 'id',
+								dataIndex: 'id',
+								title: 'N°',
+								render: (_, __, index) => index + 1,
+								width: '3rem',
 							},
-						},
-						{
-							key: 'promotion',
-							dataIndex: 'promotion',
-							title: 'Promotion',
-							render: (_, student, __) => (
-								<Tag color='blue'>
-									{student.class?.class} {student.section?.section}
-								</Tag>
-							),
-						},
-						{
-							key: 'amount',
-							dataIndex: 'amount',
-							title: 'Montant',
-							render: (_, { student }, __) => student.gender,
-							align: 'center',
-							width: '130px',
-						},
-						{
-							key: 'action',
-							dataIndex: 'action',
-							title: '',
-							render: (_, record, __) => (
-								<button
-									className='border border-primary-500 text-primary-500 flex justify-center hover:text-primary-700 py-px px-4'
-									onClick={() => generateCard(record)}
-								>
-									Imprimer la carte
-								</button>
-							),
-						},
-					]}
-				/>
+							{
+								key: 'matricule',
+								dataIndex: 'matricule',
+								title: 'Matricule',
+								render: (_, { student }, __) => student.admission_no,
+								width: '150px',
+							},
+							{
+								key: 'names',
+								dataIndex: 'names',
+								title: 'Etudiant',
+								render: (_, { student }, __) => (
+									<p>
+										{student.firstname}{' '}
+										{student.middlename != 'NULL' ? student.middlename : ' '}{' '}
+										{student.lastname}
+									</p>
+								),
+								filteredValue: [
+									...filteredPromotion,
+									...filteredSection,
+									searchedText,
+								],
+								onFilter: (value, { student, class: classe, section }) => {
+									return filterStudents(
+										filteredPromotion,
+										filteredSection,
+										value,
+										classe,
+										section,
+										student
+									);
+								},
+							},
+							{
+								key: 'promotion',
+								dataIndex: 'promotion',
+								title: 'Promotion',
+								render: (_, student, __) => (
+									<Tag color='blue'>
+										{student.class?.class} {student.section?.section}
+									</Tag>
+								),
+							},
+							{
+								key: 'amount',
+								dataIndex: 'amount',
+								title: 'Montant',
+								render: (_, { student }, __) => student.gender,
+								align: 'center',
+								width: '130px',
+							},
+							{
+								key: 'action',
+								dataIndex: 'action',
+								title: '',
+								render: (_, record, __) => (
+									<button
+										className='border border-primary-500 text-primary-500 flex justify-center hover:text-primary-700 py-px px-4'
+										onClick={() => generateCard(record)}
+									>
+										Imprimer la carte
+									</button>
+								),
+							},
+						]}
+					/>
+				)}
 			</section>
 		</main>
 	);

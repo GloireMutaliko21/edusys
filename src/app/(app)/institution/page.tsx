@@ -1,5 +1,6 @@
 'use client';
 import PageHeader from '@/components/global/PageHeader';
+import UpdateInstitution from '@/components/modals/UpdateInstitution';
 import useInstitution from '@/hooks/useInstitution';
 import { Descriptions, Divider } from 'antd';
 import Image from 'next/image';
@@ -14,7 +15,7 @@ const Page = () => {
 		setOpenOpenDrawer(true);
 	};
 
-	const UpdateInstitution = () => {
+	const UpdateInstitutionButton = () => {
 		return (
 			<div className=''>
 				<button onClick={showDrawer}>Modifier les infos</button>
@@ -23,7 +24,10 @@ const Page = () => {
 	};
 	return (
 		<main className='flex flex-col h-full'>
-			<PageHeader title='Institution' actionButton={<UpdateInstitution />} />
+			<PageHeader
+				title='Institution'
+				actionButton={<UpdateInstitutionButton />}
+			/>
 			<section className='mt-2 flex-grow bg-white dark:bg-gray-800 dark:border-gray-700 mb-5 p-5 rounded-lg'>
 				<div>
 					<Divider
@@ -106,6 +110,10 @@ const Page = () => {
 					/>
 				</div>
 			</section>
+			<UpdateInstitution
+				openDrawer={openDrawer}
+				setOpenDrawer={setOpenOpenDrawer}
+			/>
 		</main>
 	);
 };
