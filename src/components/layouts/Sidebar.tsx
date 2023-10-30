@@ -80,6 +80,7 @@ const Sidebar = () => {
 								</svg>
 							}
 						>
+							<SidebarSubLInk link='/institution' label='Institution' />
 							<SidebarSubLInk link='/sessions' label='Sessions' />
 							<SidebarSubLInk link='/promotions' label='Promotions' />
 							<SidebarSubLInk link='/fee-types' label='Types des frais' />
