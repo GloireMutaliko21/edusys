@@ -3,6 +3,7 @@ import PageHeader from '@/components/global/PageHeader';
 import { generateStudentCard } from '@/docs/studentCard';
 import { filterStudents } from '@/features/filter';
 import useClasses from '@/hooks/useClasse';
+import useInstitution from '@/hooks/useInstitution';
 import useSection from '@/hooks/useSection';
 import useStudents from '@/hooks/useStudent';
 import { Input, Select, Table, Tag } from 'antd';
@@ -16,9 +17,10 @@ const Page = () => {
 	const { classes } = useClasses();
 	const { sections } = useSection();
 	const { students } = useStudents();
+	const { institution } = useInstitution();
 
 	const generateCard = async (student: StudentGlobal) => {
-		await generateStudentCard(student);
+		await generateStudentCard(student, institution!);
 	};
 
 	return (

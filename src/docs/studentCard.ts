@@ -3,7 +3,10 @@ import 'jspdf-autotable';
 import QRCode from 'qrcode';
 import { fontBold, fontMedium, fontNormal, fontSemiBold } from '@/assets/fonts';
 
-export async function generateStudentCard(student: StudentGlobal) {
+export async function generateStudentCard(
+	student: StudentGlobal,
+	institution: Institution
+) {
 	(function (jsPDFAPI: typeof jsPDF.API) {
 		const callAddFont = function (this: any) {
 			this.addFileToVFS('Cairo-Regular-normal.ttf', fontNormal);
@@ -27,8 +30,8 @@ export async function generateStudentCard(student: StudentGlobal) {
 	// recto
 	// =================================================================
 
-	doc.addImage('/images/logo.png', 'PNG', 0.05, 0.05, 0.5, 0.5);
-	doc.addImage('/images/logo-rdc.png', 'PNG', 2.8, 0.05, 0.5, 0.5);
+	doc.addImage(institution.logoInstitution, 'PNG', 0.05, 0.05, 0.5, 0.5);
+	doc.addImage(institution.logoPays, 'PNG', 2.8, 0.05, 0.5, 0.5);
 
 	doc.setFont('Cairo-Bold');
 	doc.setFontSize(6.5);
@@ -36,17 +39,12 @@ export async function generateStudentCard(student: StudentGlobal) {
 		align: 'center',
 	});
 	doc.setFontSize(5);
-	doc.text(
-		'INSTITUT SUPERIEUR DE DEVELOPPEMENT RURAL DES GRANDS LACS',
-		1.67323,
-		0.25,
-		{
-			align: 'center',
-		}
-	);
+	doc.text(institution.designation, 1.67323, 0.25, {
+		align: 'center',
+	});
 	doc.setTextColor('#00838F');
 	doc.setFontSize(10);
-	doc.text('ISDR/GL', 1.67323, 0.38, {
+	doc.text(institution.sigle, 1.67323, 0.38, {
 		align: 'center',
 	});
 	doc.setTextColor('#EA8000');
@@ -106,7 +104,12 @@ export async function generateStudentCard(student: StudentGlobal) {
 
 	doc.setFont('Cairo-Regular');
 	doc.text('Le Secrétaire Général Académique', 0.1, 1.8);
-	doc.text('CT. Master Gloire Mutaliko', 0.1, 2.1);
+	doc.addImage(institution.signature, 'PNG', 0.2, 1.85, 1.2, 0.15);
+	doc.text(
+		`CT. ${institution.staff?.name} ${institution.staff?.surname}`,
+		0.1,
+		2.1
+	);
 
 	// verso
 	// ==================================================================
@@ -121,7 +124,7 @@ export async function generateStudentCard(student: StudentGlobal) {
 	doc.text('UNIVERSITAIRE', 2, 0.38, { align: 'center' });
 	doc.setFontSize(18);
 	doc.setTextColor('#6a0719');
-	doc.text('I.S.D.R-GL', 2, 0.65, { align: 'center' });
+	doc.text(institution.sigle, 2, 0.65, { align: 'center' });
 	doc.addImage('/images/logo-armoirie.png', 'PNG', 1.59, 0.7, 0.8, 0.8);
 	const qrCodeDataVerso = await QRCode.toDataURL(
 		JSON.stringify({
