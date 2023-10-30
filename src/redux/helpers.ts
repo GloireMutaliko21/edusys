@@ -5,6 +5,13 @@ export const authUrls = {
 	editPassword: `${apiUrl}auth/password`,
 };
 
+export const institutionUrls = {
+	getAll: `${apiUrl}institution`,
+	getOne: `${apiUrl}institution/one`,
+	add: `${apiUrl}institution/add`,
+	update: `${apiUrl}institution/update`,
+};
+
 export const studentUrls = {
 	getAll: `${apiUrl}students`,
 	getAllData: `${apiUrl}students/data`,

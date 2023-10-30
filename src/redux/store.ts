@@ -6,6 +6,7 @@ import sectionReducer from './sections/section.slice';
 import feeTypeReducer from './feeType/feeType.slice';
 import staffReducer from './staff/staff.slice';
 import classReducer from './classes/class.slice';
+import institutionReducer from './institution/institution.slice';
 
 const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
 		feeType: feeTypeReducer,
 		staff: staffReducer,
 		class: classReducer,
+		institution: institutionReducer,
 	},
 });
 

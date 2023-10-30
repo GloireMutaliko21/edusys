@@ -1,6 +1,6 @@
 interface GeneralInfos {
 	id: string | number;
-	is_active?: 'yes' | 'no' | number;
+	is_active?: 'yes' | 'no' | number | boolean;
 	createdAt?: Date;
 	created_at?: Date | string;
 	updatedAt?: Date;
@@ -164,4 +164,29 @@ interface User extends GeneralInfos {
 	type: string;
 	other?: Record<string, any>;
 	token?: string;
+}
+
+interface Institution extends GeneralInfos {
+	designation: string;
+	sigle: string;
+	logoInstitution: string;
+	logoPays: string;
+	signature: string;
+	staffs_id: number | string;
+	staff?: Staff;
+}
+
+interface CreateInstitutionDto {
+	designation: string;
+	sigle: string;
+	staffs_id: string | number;
+	images: any[];
+}
+
+interface UpdateInstitutionDto {
+	designation?: string;
+	sigle?: string;
+	staffs_id?: string | number;
+	is_active?: any;
+	images?: any[];
 }
