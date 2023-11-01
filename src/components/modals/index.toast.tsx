@@ -24,6 +24,10 @@ import {
 	setSectionIsError,
 	setSectionIsSuccess,
 } from '@/redux/sections/section.slice';
+import {
+	setInstitutionIsError,
+	setInstitutionIsSuccess,
+} from '@/redux/institution/institution.slice';
 
 const ToastMessageManager = () => {
 	const [toast, contextHolder] = Toast.useMessage({ maxCount: 1 });
@@ -154,6 +158,23 @@ const ToastMessageManager = () => {
 			dispach(setSessionIsError(false));
 		}
 	}, [staffStatus]);
+
+	/**
+	 * institution toast messages
+	 */
+	const { status: institutionStatus, message: institutionMessage } =
+		useAppSelector((state) => state.institution);
+
+	useEffect(() => {
+		if (institutionStatus.isSuccess) {
+			institutionMessage && toast.success(institutionMessage);
+			dispach(setInstitutionIsSuccess(false));
+		}
+		if (institutionStatus.isError) {
+			institutionMessage && toast.error(institutionMessage);
+			dispach(setInstitutionIsError(false));
+		}
+	}, [institutionStatus]);
 
 	return (
 		<>
