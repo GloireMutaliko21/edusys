@@ -61,7 +61,7 @@ const Page = () => {
 								key: '4',
 								label: 'Logos',
 								children: (
-									<div className='grid gap-3 lg:grid-cols-2 mb-5'>
+									<div className='grid gap-3 grid-cols-2 mb-5'>
 										<div className='flex flex-col items-center justify-center'>
 											<p className='text-primary-700'>Logo institution</p>
 											<div className='w-24 h-24 rounded border'>
