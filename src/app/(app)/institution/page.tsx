@@ -32,6 +32,8 @@ const Page = () => {
 				<div>
 					<List
 						loading={status.isLoading}
+						dataSource={[institution]}
+						rowKey={(item) => item?.id.toString()!}
 						renderItem={() => (
 							<>
 								<Divider
