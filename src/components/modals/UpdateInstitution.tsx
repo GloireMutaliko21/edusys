@@ -44,6 +44,7 @@ const UpdateInstitution = ({
 		const { designation, sigle, staffs_id } = values;
 		dispatch(
 			updateInstitution({
+				id: institution?.id!,
 				designation,
 				sigle,
 				staffs_id,

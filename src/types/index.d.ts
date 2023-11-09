@@ -184,6 +184,7 @@ interface CreateInstitutionDto {
 }
 
 interface UpdateInstitutionDto {
+	id: string | number;
 	designation?: string;
 	sigle?: string;
 	staffs_id?: string | number;
