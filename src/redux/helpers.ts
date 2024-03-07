@@ -9,7 +9,7 @@ export const institutionUrls = {
 	getAll: `${apiUrl}institution`,
 	getOne: `${apiUrl}institution/one`,
 	add: `${apiUrl}institution/add`,
-	update: `${apiUrl}institution/update`,
+	update: (id: string | number) => `${apiUrl}institution/update?id=${id}`,
 };
 
 export const studentUrls = {

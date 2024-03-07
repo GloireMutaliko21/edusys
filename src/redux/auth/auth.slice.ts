@@ -69,7 +69,7 @@ const authSlice = createSlice({
 			.addCase(loginUser.rejected, (state, { payload }) => {
 				localStorage.removeItem('user-session');
 				state.status = STATUS.ERROR;
-				state.message = payload as string;
+				state.message = "Erreur d'authentification";
 				state.user = null;
 			});
 	},

@@ -30,69 +30,77 @@ export async function generateStudentCard(
 	// recto
 	// =================================================================
 
-	doc.addImage(institution.logoInstitution, 'PNG', 0.05, 0.05, 0.5, 0.5);
-	doc.addImage(institution.logoPays, 'PNG', 2.8, 0.05, 0.5, 0.5);
+	doc.addImage('/images/CARTE_RECTO.jpg', 'PNG', 0, 0, 3.34646, 2.16535);
+
+	doc.addImage(institution.logoInstitution, 'PNG', 0.05, 0.25, 0.6, 0.6);
+	// doc.addImage(institution.logoPays, 'PNG', 2.8, 0.05, 0.5, 0.5);
 
 	doc.setFont('Cairo-Bold');
-	doc.setFontSize(6.5);
-	doc.text('Enseignemt Supérieur et Universitaire', 1.67323, 0.16, {
-		align: 'center',
-	});
-	doc.setFontSize(5);
-	doc.text(institution.designation, 1.67323, 0.25, {
-		align: 'center',
-	});
-	doc.setTextColor('#00838F');
-	doc.setFontSize(10);
-	doc.text(institution.sigle, 1.67323, 0.38, {
-		align: 'center',
-	});
-	doc.setTextColor('#EA8000');
+	// doc.setFontSize(6.5);
+	// doc.text('Enseignemt Supérieur et Universitaire', 1.67323, 0.16, {
+	// 	align: 'center',
+	// });
+	doc.setTextColor('#ffffff');
+	doc.setFontSize(6);
+	doc.text(institution.designation.slice(0, 42), 0.65, 0.4);
 	doc.setFontSize(8);
-	doc.text("CARTE D'ETUDIANT", 1.67323, 0.5, {
-		align: 'center',
-	});
+	doc.text(institution.sigle, 0.68, 0.55);
+	// doc.setTextColor('#EA8000');
+	// doc.setFontSize(8);
+	// doc.text("CARTE D'ETUDIANT", 1.67323, 0.5, {
+	// 	align: 'center',
+	// });
 
-	doc.setLineWidth(0.025);
-	doc.setDrawColor(0, 131, 143);
-	doc.line(0, 0.57, 3.34646, 0.56);
-
+	// doc.setLineWidth(0.025);
+	// doc.setDrawColor(0, 131, 143);
+	// doc.line(0, 0.57, 3.34646, 0.56);
+	doc.setFillColor('#ffffff');
+	doc.rect(2.5, 0.05, 0.8, 0.8, 'F');
 	doc.addImage(
 		student.student.image! || '/images/avatar.png',
 		'PNG',
-		0.05,
-		0.7,
-		0.8,
-		0.8
+		2.54,
+		0.1,
+		0.75,
+		0.75
 	);
 	doc.setFont('Cairo-Bold');
 	doc.setTextColor('#000000');
+	doc.setFontSize(10);
+	doc.text('ETUDIANT', 0.05, 1.3);
+
+	doc.setFont('Cairo-Regular');
 	doc.setFontSize(7);
+	doc.text(`|  N° étudiant : `, 1, 1.275);
+	doc.setFont('Cairo-Bold');
+	doc.text(`${student.student.admission_no}`, 1.6, 1.275);
+	doc.setFontSize(12);
+	doc.text(`${student.session.session}`, 2.6, 1.2);
 
-	doc.text('Noms', 0.9, 0.7);
-	doc.text('Postnom&prenom', 0.9, 0.85);
-	doc.text('Matricule', 0.9, 1);
-	doc.text('Section', 0.9, 1.15);
-	doc.text('Promotion', 0.9, 1.3);
-	doc.text('Année acad.', 0.9, 1.45);
-	doc.text('Téléphone', 0.9, 1.6);
+	// doc.text('Noms', 0.9, 0.7);
+	// doc.text('Postnom&prenom', 0.9, 0.85);
+	// doc.text('Matricule', 0.9, 1);
+	// doc.text('Section', 0.9, 1.15);
+	// doc.text('Promotion', 0.9, 1.3);
+	// doc.text('Année acad.', 0.9, 1.45);
+	// doc.text('Téléphone', 0.9, 1.6);
 
-	doc.text(`: ${student.student.firstname}`, 1.68, 0.7);
-	doc.text(`: ${student.student.lastname}`, 1.68, 0.85);
-	doc.text(`: ${student.student.admission_no}`, 1.68, 1);
-	doc.text(`: ${student.section.section.slice(0, 33)}`, 1.68, 1.15);
-	doc.text(`: ${student.class.class}`, 1.68, 1.3);
-	doc.text(
-		`: ${student.session.session.slice(
-			0,
-			student.session.session.indexOf('-') + 1
-		)}20${student.session.session.slice(
-			student.session.session.indexOf('-') + 1
-		)}`,
-		1.68,
-		1.45
-	);
-	doc.text(`: ${student.student.mobileno.replaceAll('?', ' ')}`, 1.68, 1.6);
+	// doc.text(`: ${student.student.firstname}`, 1.68, 0.7);
+	// doc.text(`: ${student.student.lastname}`, 1.68, 0.85);
+	// doc.text(`: ${student.student.admission_no}`, 1.68, 1);
+	// doc.text(`: ${student.section.section.slice(0, 33)}`, 1.68, 1.15);
+	// doc.text(`: ${student.class.class}`, 1.68, 1.3);
+	// doc.text(
+	// 	`: ${student.session.session.slice(
+	// 		0,
+	// 		student.session.session.indexOf('-') + 1
+	// 	)}20${student.session.session.slice(
+	// 		student.session.session.indexOf('-') + 1
+	// 	)}`,
+	// 	1.68,
+	// 	1.45
+	// );
+	// doc.text(`: ${student.student.mobileno.replaceAll('?', ' ')}`, 1.68, 1.6);
 
 	const qrCodeData = await QRCode.toDataURL(
 		JSON.stringify({
@@ -101,31 +109,33 @@ export async function generateStudentCard(
 		})
 	);
 	doc.addImage(qrCodeData, 'PNG', 2.55, 1.37, 0.8, 0.8);
+	doc.setFontSize(7);
 
-	doc.setFont('Cairo-Regular');
-	doc.text('Le Secrétaire Général Académique', 0.1, 1.8);
-	doc.addImage(institution.signature, 'PNG', 0.2, 1.85, 1.2, 0.15);
-	doc.text(
-		`CT. ${institution.staff?.name} ${institution.staff?.surname}`,
-		0.1,
-		2.1
-	);
+	// doc.setFont('Cairo-Regular');
+	// doc.text('Le Secrétaire Général Académique', 0.1, 1.8);
+	// doc.addImage(institution.signature, 'PNG', 0.2, 1.85, 1.2, 0.15);
+	// doc.text(
+	// 	`CT. ${institution.staff?.name} ${institution.staff?.surname}`,
+	// 	0.1,
+	// 	2.1
+	// );
 
 	// verso
 	// ==================================================================
 	doc.addPage([3.34646, 2.16535], 'landscape');
-	doc.setFont('Cairo-Bold');
-	doc.setFontSize(8);
-	doc.setTextColor('#0A84FF');
-	doc.text('REPUBLIQUE DEMOCRATIQUE DU CONGO', 2, 0.14, { align: 'center' });
-	doc.text("MINISTERE DE L'ENSEIGNEMENT SUPERIEUR ET", 2, 0.26, {
-		align: 'center',
-	});
-	doc.text('UNIVERSITAIRE', 2, 0.38, { align: 'center' });
-	doc.setFontSize(18);
-	doc.setTextColor('#6a0719');
-	doc.text(institution.sigle, 2, 0.65, { align: 'center' });
-	doc.addImage('/images/logo-armoirie.png', 'PNG', 1.59, 0.7, 0.8, 0.8);
+	doc.addImage('/images/CARTE_VERSO.jpg', 'PNG', 0, 0, 3.34646, 2.16535);
+	// doc.setFont('Cairo-Bold');
+	// doc.setFontSize(8);
+	// doc.setTextColor('#0A84FF');
+	// doc.text('REPUBLIQUE DEMOCRATIQUE DU CONGO', 2, 0.14, { align: 'center' });
+	// doc.text("MINISTERE DE L'ENSEIGNEMENT SUPERIEUR ET", 2, 0.26, {
+	// 	align: 'center',
+	// });
+	// doc.text('UNIVERSITAIRE', 2, 0.38, { align: 'center' });
+	// doc.setFontSize(18);
+	// doc.setTextColor('#6a0719');
+	// doc.text(institution.sigle, 2, 0.65, { align: 'center' });
+	// doc.addImage('/images/logo-armoirie.png', 'PNG', 1.59, 0.7, 0.8, 0.8);
 	const qrCodeDataVerso = await QRCode.toDataURL(
 		JSON.stringify({
 			id: student.student.admission_no,
@@ -140,7 +150,7 @@ export async function generateStudentCard(
 
 	doc.setTextColor('#000000');
 	doc.setFontSize(12);
-	doc.text('Laissez-passer', 2, 1.65, {
+	doc.text('Laissez-passer', 2, 1.7, {
 		align: 'center',
 	});
 	doc.setTextColor('#6a0719');

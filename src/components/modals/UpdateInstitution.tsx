@@ -19,9 +19,22 @@ const UpdateInstitution = ({
 	const inputLogoPays = useRef(null);
 	const inputLogoSignature = useRef(null);
 
-	const [logoInstitution, setLogoInstitution] = useState<File>();
-	const [logoPays, setLogoPays] = useState<File>();
-	const [logoSignature, setLogoSignature] = useState<File>();
+	const onClose = () => {
+		setOpenDrawer(false);
+	};
+	const dispatch = useAppDispatch();
+	const { status, institution } = useAppSelector((state) => state.institution);
+	const { staffs, status: staffStatus } = useStaff();
+
+	const [logoInstitution, setLogoInstitution] = useState<File>(
+		new File([institution?.logoInstitution!], '', { type: 'image/jpeg' })
+	);
+	const [logoPays, setLogoPays] = useState<File>(
+		new File([institution?.logoPays!], '', { type: 'image/jpeg' })
+	);
+	const [logoSignature, setLogoSignature] = useState<File>(
+		new File([institution?.signature!], '', { type: 'image/jpeg' })
+	);
 
 	const handleChangeLogoInst = (e: any) => {
 		setLogoInstitution(e.target.files[0]);
@@ -33,17 +46,11 @@ const UpdateInstitution = ({
 		setLogoSignature(e.target.files[0]);
 	};
 
-	const onClose = () => {
-		setOpenDrawer(false);
-	};
-	const dispatch = useAppDispatch();
-	const { status, institution } = useAppSelector((state) => state.institution);
-	const { staffs, status: staffStatus } = useStaff();
-
 	const onSubmit = (values: any) => {
 		const { designation, sigle, staffs_id } = values;
 		dispatch(
 			updateInstitution({
+				id: institution?.id!,
 				designation,
 				sigle,
 				staffs_id,

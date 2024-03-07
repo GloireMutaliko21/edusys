@@ -20,7 +20,8 @@ export const login: AsyncThunkPayloadCreator<
 			data
 		);
 		return response.data;
-	} catch (error) {
+	} catch (error: any) {
+		console.log(error.message);
 		return axios.isAxiosError(error)
 			? thunkAPI.rejectWithValue(returnApiError(error))
 			: thunkAPI.rejectWithValue('Auth error');

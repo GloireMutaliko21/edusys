@@ -67,10 +67,21 @@ export const updateInstitution: AsyncThunkPayloadCreator<
 		auth: { token },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const body = serialize(payload);
-		const response: AxiosResponse<GetInstitution> = await axios.patch(
-			institutionUrls.update,
-			body,
+		const { id, ...rest } = payload;
+		const formData = new FormData();
+
+		if (rest.designation) formData.append('designation', rest.designation!);
+		if (rest.sigle) formData.append('sigle', rest.sigle!);
+		if (rest.staffs_id)
+			formData.append('staffs_id', rest.staffs_id?.toString()!);
+		if (rest.images?.[0]) formData.append('images', rest.images[0]);
+		if (rest.images?.[1]) formData.append('images', rest.images[1]);
+		if (rest.images?.[2]) formData.append('images', rest.images[2]);
+
+		// const body = serialize(rest);
+		const response: AxiosResponse<GetInstitution> = await axios.patchForm(
+			institutionUrls.update(id),
+			formData,
 			{
 				headers: {
 					Authorization: `Bearer ${token}`,
