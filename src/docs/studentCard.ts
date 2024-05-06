@@ -35,6 +35,7 @@ export async function generateStudentCard(
 	// doc.addImage(institution?.logoInstitution, 'PNG', 0.05, 0.05, 0.6, 0.6);
 	doc.addImage("/images/logo.jpg", 'PNG', 0.05, 0.05, 0.4, 0.4);
 	// doc.addImage(institution?.logoPays, 'PNG', 2.8, 0.05, 0.5, 0.5);
+	doc.addImage("/images/drapeau.png", 'PNG', 2.9, 0.05, 0.4, 0.4);
 
 	doc.setFont('Cairo-Bold');
 
@@ -44,7 +45,7 @@ export async function generateStudentCard(
 	// 	align: 'center',
 	// });
 
-
+// signature.webp
 
 	doc.setFontSize(9);
 	// doc.text(institution?.sigle, 1.67323, 0.4, { align: 'center' });
@@ -92,12 +93,11 @@ export async function generateStudentCard(
 	doc.setFont('Cairo-Regular');
 	doc.setTextColor('#0891b2');
 	doc.text("Le Secrétaire Général Académique", 1.67323, 1.75, { align: 'center' });
-
+	doc.addImage("/images/signature.webp", 'PNG', 1.3, 1.77, 0.9, 0.2,);
     doc.setFontSize(7);
 	doc.setFont('Cairo-Bold');
 	doc.text("C.T. Master Claudine Mafuko", 1.67323, 2.05, { align: 'center' });
 	doc.addImage('/images/avatar.jpg', 'PNG', 2.6, 0.8, 0.7, 0.7);
-
 	const qrCodeData = await QRCode.toDataURL(
 		JSON.stringify({
 			id: student?.student.id,
@@ -112,11 +112,11 @@ export async function generateStudentCard(
 	doc.addPage([3.34646, 2.16535], 'landscape');
 	doc.addImage('/images/Carte_etudiant.jpg', 'PNG', 0, 0, 3.34646, 2.16535);
 
-	doc.addImage(qrCodeData, 'PNG', 0.04, 0.9, 0.7, 0.8);
+	doc.addImage(qrCodeData, 'PNG', 0.04, 0.9, 0.8, 0.9);
 	doc.setFont('Cairo-Bold');
 	doc.setTextColor('#f8fafc');
-	doc.setFontSize(14);
-	doc.text("CARTE D'ETUDIANT" , 1.67323,0.25, { align: 'center' });
+	doc.setFontSize(16);
+	doc.text("CARTE D'ETUDIANT" , 1.67323,0.38, { align: 'center' });
 	doc.setFont('Cairo-Regular');
 	// doc.text('Le Secrétaire Général Académique', 0.1, 1.2);
 	// doc.addImage(institution.signature, 'PNG', 0.2, 1.3, 1, 0.15);
