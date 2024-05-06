@@ -30,44 +30,53 @@ export async function generateStudentCard(
 	// recto
 	// =================================================================
 
-	doc.addImage('/images/carte_recto_ok.jpeg', 'PNG', 0, 0, 3.34646, 2.16535);
+	doc.addImage('/images/Carte_etudiant.jpg', 'PNG', 0, 0, 3.34646, 2.16535);
 
-	doc.addImage(institution.logoInstitution, 'PNG', 0.05, 0.05, 0.6, 0.6);
-	doc.addImage(institution.logoPays, 'PNG', 2.8, 0.05, 0.5, 0.5);
+	// doc.addImage(institution?.logoInstitution, 'PNG', 0.05, 0.05, 0.6, 0.6);
+	doc.addImage("/images/logo.jpg", 'PNG', 0.05, 0.05, 0.4, 0.4);
+	// doc.addImage(institution?.logoPays, 'PNG', 2.8, 0.05, 0.5, 0.5);
 
 	doc.setFont('Cairo-Bold');
 
 	doc.setTextColor('#ffffff');
 	doc.setFontSize(6.5);
-	doc.text(institution.designation.slice(0, 42), 1.67323, 0.26, {
-		align: 'center',
-	});
+	// doc.text(institution?.designation.slice(0, 42), 1.67323, 0.26, {
+	// 	align: 'center',
+	// });
+
+
+
 	doc.setFontSize(9);
-	doc.text(institution.sigle, 1.67323, 0.4, { align: 'center' });
-	doc.setFontSize(12);
-	doc.text("CARTE D'ETUDIANT", 1.67323, 0.7, { align: 'center' });
+	// doc.text(institution?.sigle, 1.67323, 0.4, { align: 'center' });
+	doc.setFontSize(6);
+	// doc.setTextColor('#000000');
+	doc.text("REPUBLIQUE DEMOCRATIQUE DU CONGO", 1.67323, 0.13, { align: 'center' });
+		doc.setFontSize(6);
+	doc.text("ENSEIGNEMENT SUPERIEUR ET UNIVERSITAIRE", 1.67323, 0.25, { align: 'center' });
+			doc.setFontSize(6);
+	doc.text("INST. SUPERIEUR DE DEVELOPPEMENT RURAL DES GRANDS LACS", 1.67323, 0.37, { align: 'center' });
+	doc.setFontSize(14);
+	doc.setTextColor('#f8fafc');
+	doc.text("«ISDR/GL»", 1.67323, 0.55, { align: 'center' });
 
-	doc.setFont('Cairo-Bold');
+	
 	doc.setTextColor('#000000');
-	doc.setFontSize(10);
-	// doc.text('ETUDIANT', 0.05, 1.3);
-
 	doc.setFont('Cairo-Regular');
 	doc.setFontSize(7);
 
-	doc.text('Noms', 0.15, 1.3);
-	doc.text('Postnom & prenom', 0.15, 1.45);
-	doc.text('Matricule', 0.15, 1.6);
-	doc.text('Promotion', 0.15, 1.75);
-	doc.text('Section', 0.15, 1.9);
-	doc.text('Année acad.', 0.15, 2.05);
+	doc.text('Nom', 0.15, 0.8);
+	doc.text('Postnom & prénom', 0.15, 0.95);
+	doc.text('Matricule', 0.15, 1.10);
+	doc.text('Promotion', 0.15, 1.25);
+	doc.text('Section', 0.15, 1.4);
+	doc.text('Année acad.', 0.15, 1.55);
 
 	doc.setFont('Cairo-Bold');
-	doc.text(`: ${student.student.firstname}`, 1, 1.3);
-	doc.text(`: ${student.student.lastname}`, 1, 1.45);
-	doc.text(`: ${student.student.admission_no}`, 1, 1.6);
-	doc.text(`: ${student.class.class}`, 1, 1.75);
-	doc.text(`: ${student.section.section.slice(0, 33)}`, 1, 1.9);
+	doc.text(`: ${student.student.firstname}`, 1,0.8);
+	doc.text(`: ${student.student.lastname}`, 1, 0.95);
+	doc.text(`: ${student.student.admission_no}`, 1, 1.10);
+	doc.text(`: ${student.class.class}`, 1, 1.25);
+	doc.text(`: ${student.section.section.slice(0, 33)}`, 1, 1.4);
 	doc.text(
 		`: ${student.session.session.slice(
 			0,
@@ -76,33 +85,46 @@ export async function generateStudentCard(
 			student.session.session.indexOf('-') + 1
 		)}`,
 		1,
-		2.05
+		1.55
 	);
+
+	doc.setFontSize(7);
+	doc.setFont('Cairo-Regular');
+	doc.setTextColor('#0891b2');
+	doc.text("Le Secrétaire Général Académique", 1.67323, 1.75, { align: 'center' });
+
+    doc.setFontSize(7);
+	doc.setFont('Cairo-Bold');
+	doc.text("C.T. Master Claudine Mafuko", 1.67323, 2.05, { align: 'center' });
+	doc.addImage('/images/avatar.jpg', 'PNG', 2.6, 0.8, 0.7, 0.7);
 
 	const qrCodeData = await QRCode.toDataURL(
 		JSON.stringify({
-			id: student.student.id,
-			matricule: student.student.admission_no,
+			id: student?.student.id,
+			matricule: student?.student?.admission_no,
 		})
 	);
 	// doc.addImage(qrCodeData, 'PNG', 2.55, 1.37, 0.8, 0.8);
-	doc.addImage('/images/avatar.png', 'PNG', 2.55, 1.15, 0.7, 0.7);
+
 
 	// verso
 	// ==================================================================
 	doc.addPage([3.34646, 2.16535], 'landscape');
-	doc.addImage('/images/CARTE_VERSO.jpg', 'PNG', 0, 0, 3.34646, 2.16535);
+	doc.addImage('/images/Carte_etudiant.jpg', 'PNG', 0, 0, 3.34646, 2.16535);
 
-	doc.addImage(qrCodeData, 'PNG', 0.04, 0.04, 0.8, 0.8);
-
+	doc.addImage(qrCodeData, 'PNG', 0.04, 0.9, 0.7, 0.8);
+	doc.setFont('Cairo-Bold');
+	doc.setTextColor('#f8fafc');
+	doc.setFontSize(14);
+	doc.text("CARTE D'ETUDIANT" , 1.67323,0.25, { align: 'center' });
 	doc.setFont('Cairo-Regular');
-	doc.text('Le Secrétaire Général Académique', 0.1, 1.2);
-	doc.addImage(institution.signature, 'PNG', 0.2, 1.3, 1, 0.15);
-	doc.text(
-		`CT. ${institution.staff?.name} ${institution.staff?.surname}`,
-		0.1,
-		1.55
-	);
+	// doc.text('Le Secrétaire Général Académique', 0.1, 1.2);
+	// doc.addImage(institution.signature, 'PNG', 0.2, 1.3, 1, 0.15);
+	// doc.text(
+	// 	`CT. ${institution.staff?.name} ${institution.staff?.surname}`,
+	// 	0.1,
+	// 	1.55
+	// );
 
 	doc.setTextColor('#000000');
 	doc.setFontSize(12);
