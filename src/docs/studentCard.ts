@@ -93,11 +93,13 @@ export async function generateStudentCard(
 	doc.setFont('Cairo-Regular');
 	doc.setTextColor('#0891b2');
 	doc.text("Le Secrétaire Général Académique", 1.67323, 1.75, { align: 'center' });
-	doc.addImage("/images/signature.webp", 'PNG', 1.3, 1.77, 0.9, 0.2,);
+	doc.addImage(institution?.signature??"/images/signature.webp", 'PNG', 1.3, 1.77, 0.9, 0.2,);
     doc.setFontSize(7);
 	doc.setFont('Cairo-Bold');
-	doc.text("C.T. Master Claudine Mafuko", 1.67323, 2.05, { align: 'center' });
-	doc.addImage('/images/avatar.jpg', 'PNG', 2.6, 0.8, 0.7, 0.7);
+	doc.text(
+			`CT. ${institution.staff?.name} ${institution.staff?.surname}`
+			, 1.67323, 2.05, { align: 'center' });
+	doc.addImage(student?.student?.image??'/images/avatar.jpg', 'PNG', 2.6, 0.8, 0.7, 0.7);
 	const qrCodeData = await QRCode.toDataURL(
 		JSON.stringify({
 			id: student?.student.id,

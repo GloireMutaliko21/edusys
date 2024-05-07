@@ -27,14 +27,8 @@ const Container = ({ children }: { children: React.ReactNode }) => {
           shadow="0 0 10px #2299DD,0 0 5px #2299DD"
         />
         <AntdLayout>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
+          {children}
+
           <ModalManager />
           <ToastMessageManager />
         </AntdLayout>
